@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePlayerGamesTable extends Migration
 {
@@ -36,7 +37,7 @@ class CreatePlayerGamesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('player_games');
+        Schema::dropIfExists('player_games');
     }
 
 }

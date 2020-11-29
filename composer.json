@@ -14,7 +14,9 @@
     "authors": [
         {
             "name": "Richard Fu",
-            "email": "fur@richardfu.net"
+            "email": "fur@richardfu.net",
+            "homepage": "https://www.richardfu.net",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -29,8 +31,26 @@
     "extra": {
         "laravel": {
             "providers": [
-                "furic\\gameessentials\\GameEssentialsServiceProvider"
+                "Furic\\GameEssentials\\GameEssentialsServiceProvider"
             ]
         }
-    }
+    },
+    "funding": [
+        {
+            "type": "patreon",
+            "url": "https://www.patreon.com/furic"
+        },
+        {
+            "type": "tidelift",
+            "url": "https://tidelift.com/funding/github/packagist/furic/game-essentials"
+        },
+        {
+            "url": "https://github.com/furic",
+            "type": "github"
+        },
+        {
+            "type": "custom",
+            "url": "https://paypal.me/furic"
+        }
+    ]
 }

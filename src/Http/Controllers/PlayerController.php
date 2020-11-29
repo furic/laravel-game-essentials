@@ -1,20 +1,31 @@
 <?php
 
-namespace Furic\GameEssentials;
+namespace Furic\GameEssentials\Http\Controllers;
 
-use Player;
-use PlayerGame;
+use Furic\GameEssentials\Models\Player;
+use Furic\GameEssentials\Models\PlayerGame;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
 
+    /**
+     * Display the specified player resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        return Player::findOrFail($id);
+        return response(Player::findOrFail($id), 200);
     }
 
+    /**
+     * Show the form for creating a new player resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create(Request $request)
     {
         // Check if an old player
@@ -49,25 +60,42 @@ class PlayerController extends Controller
             }
         }
         
-        return $player;
+        return response($player, 200);
     }
     
+    /**
+     * Display the ID of the player resource by a given name.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showId($name)
     {
         $player = Player::findByName($name);
-        return ["id" => $player->id];
+        return response(["id" => $player->id], 200);
     }
 
+    /**
+     * Display the online status of the player resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showOnlineStatus(Request $request, $id)
     {
         $player = PlayerGame::findByPlayerGame($id, $request->playgames_id);
-        return ["id" => $player->online_status];
+        return response(["id" => $player->online_status], 200);
     }
     
+    /**
+     * Update the specified player resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $player = Player::findOrFail($id);
         $player->update($request->all());
-        return $player;
+        return response($player, 200);
     }
 }

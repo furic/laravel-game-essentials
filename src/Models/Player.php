@@ -1,6 +1,6 @@
 <?php
 
-namespace Furic\GameEssentials;
+namespace Furic\GameEssentials\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
