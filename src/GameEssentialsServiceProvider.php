@@ -4,8 +4,9 @@ namespace Furic\GameEssentials;
 
 use Illuminate\Support\ServiceProvider;
 
-class RedeemCodesServiceProvider extends ServiceProvider
+class GameEssentialsServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap the application services.
      *
@@ -34,4 +35,5 @@ class RedeemCodesServiceProvider extends ServiceProvider
         //     __DIR__ . '/../config/game-essentials.php', 'game-essentials'
         // );
     }
+
 }
