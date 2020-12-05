@@ -38,4 +38,5 @@ class Player extends Model
     {
         return SELF::where('udid', $udid)->first();
     }
+
 }

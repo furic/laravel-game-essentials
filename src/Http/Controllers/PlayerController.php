@@ -22,13 +22,27 @@ class PlayerController extends Controller
     }
 
     /**
-     * Show the form for creating a new player resource.
+     * Display the specified player resource with a given name.
      *
+     * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
+    public function showWithName($name)
+    {
+        $player = Player::findByName($name);
+        return response($player, 200);
+    }
+
+    /**
+     * Store a newly created player resource in storage.
+     *
+     * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
         // Check if an old player
+        $player = NULL;
         if ($request->has('facebook_id') && !empty($request->facebook_id)) {
             $player = Player::findByFacebookId($request->facebook_id);
         } else if ($request->has('playgames_id') && !empty($request->playgames_id)) {
@@ -64,28 +78,6 @@ class PlayerController extends Controller
     }
     
     /**
-     * Display the ID of the player resource by a given name.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showId($name)
-    {
-        $player = Player::findByName($name);
-        return response(["id" => $player->id], 200);
-    }
-
-    /**
-     * Display the online status of the player resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showOnlineStatus(Request $request, $id)
-    {
-        $player = PlayerGame::findByPlayerGame($id, $request->playgames_id);
-        return response(["id" => $player->online_status], 200);
-    }
-    
-    /**
      * Update the specified player resource in storage.
      *
      * @param  Request  $request
@@ -98,4 +90,5 @@ class PlayerController extends Controller
         $player->update($request->all());
         return response($player, 200);
     }
+
 }

@@ -23,4 +23,5 @@ class PlayerGame extends Model
     {
         return SELF::where('game_id', $gameId);
     }
+    
 }

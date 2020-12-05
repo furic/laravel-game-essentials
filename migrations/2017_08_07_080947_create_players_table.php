@@ -20,8 +20,8 @@ class CreatePlayersTable extends Migration
             $table->string('facebook_id', 128)->nullable();
             $table->string('gamecenter_id', 128)->nullable();
             $table->string('playgames_id', 128)->nullable();
-            $table->string('udid', 128);
-            $table->string('name', 128)->nullable;
+            $table->string('udid', 128)->nullable();
+            $table->string('name', 128)->nullable();
             $table->string('ip', 15);
             
             $table->timestamps();

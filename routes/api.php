@@ -1,13 +1,19 @@
 <?php
+
+use Illuminate\Support\Facades\Route;
+use Furic\RedeemCodes\Http\Controllers\GameController;
+use Furic\RedeemCodes\Http\Controllers\PlayerController;
+use Furic\RedeemCodes\Http\Controllers\PlayerGameController;
+
 // Games
-$app->get('/games/{gameId}', 'GameController@show');
-$app->get('/games/{gameId}/versions', 'GameController@showVersions');
+Route::get('games/{id}', [GameController::class, 'show'])->name('games.show');
+Route::get('games/{id}/versions', [GameController::class, 'showVersions'])->name('games.versions');
 
 // Players
-$app->get('/players/{playerId}', 'PlayerController@show');
-$app->get('/players/name/{playerName}', 'PlayerController@showId');
-$app->post('/players', 'PlayerController@create');
-$app->post('/players/{playerId}', 'PlayerController@update');
+Route::get('players/{id}', [PlayerController::class, 'show'])->name('players.show');
+Route::get('players/name/{name}', [PlayerController::class, 'showWithName'])->name('players.show-with-name');
+Route::post('players', [PlayerController::class, 'create'])->name('players.create');
+Route::put('players/{id}', [PlayerController::class, 'update'])->name('players.update');
 
 // Player Games
-$app->get('/games/{gameId}/players', 'PlayerGameController@showPlayers');
+Route::get('games/{id}/players', [PlayerGameController::class, 'showPlayers'])->name('games.players');

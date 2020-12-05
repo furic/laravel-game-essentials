@@ -12,12 +12,14 @@ class PlayerGameController extends Controller
     /**
      * Display a listing of the player resource by a given game ID.
      *
+     * @param  Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showPlayers(Request $request, $gameId)
+    public function showPlayers(Request $request, $id)
     {
         $max = $request->max;
-        $players = PlayerGame::getPlayers($gameId);
+        $players = PlayerGame::getPlayers($id);
         if ($max <= 0) {
             return response($players->get(), 200);
         } else {

@@ -105,22 +105,22 @@ Finally, a player-game has following parameters:
 
 ### API
 
-GET `<server url>/games/{game-id}`
+GET `<server url>/games/{id}`
 Returns a JSON data from a given game ID, for debug usage only.
 
-GET `<server url>/games/{game-id}/versions`
+GET `<server url>/games/{id}/versions`
 Returns a JSON data containing the versions from a given game ID, for client checking the latest game version and perform force-update.
 
-GET `<server url>/players/{player-id}`
+GET `<server url>/players/{id}`
 Returns a JSON data from a given player ID, for debug usage only.
 
-GET `<server url>/players/name/{player-name}`
+GET `<server url>/players/name/{name}`
 Returns a JSON data from a given player name, for debug usage only.
 
 POST `<server url>/players`
 Creates a player with given POST data.
 
-POST `<server url>/players/{player-id}`
+PUT `<server url>/players/{id}`
 Updates a player with a given player id and POST data.
 
 GET `<server url>/games/{game-id}/players`
@@ -130,7 +130,7 @@ Returns a JSON array of all players from a given game ID, for debug usage only.
 
 - Create the web console to add/edit games.
 - Add admin login for web console.
-- Add tests.
+- Add tests and factories.
 
 ## License
 

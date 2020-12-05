@@ -2,7 +2,7 @@
 
 namespace Furic\GameEssentials\Http\Controllers;
 
-use Game;
+use Furic\GameEssentials\Models\Game;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
