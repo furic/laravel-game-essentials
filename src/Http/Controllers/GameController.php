@@ -17,7 +17,7 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        return reponse(Game::findOrFail($id), 200);
+        return response(Game::findOrFail($id), 200);
     }
 
     /**
@@ -29,7 +29,7 @@ class GameController extends Controller
     public function showVersions($id) // Depricated
     {
         $game = Game::findOrFail($id);
-        return reponse(['ios' => $game->version_ios, 'android' => $game->version_android, 'tvos' => $game->version_tvos], 200);
+        return response(['ios' => $game->version_ios, 'android' => $game->version_android, 'tvos' => $game->version_tvos], 200);
     }
 
 }

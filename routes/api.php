@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Furic\RedeemCodes\Http\Controllers\GameController;
-use Furic\RedeemCodes\Http\Controllers\PlayerController;
-use Furic\RedeemCodes\Http\Controllers\PlayerGameController;
+use Furic\GameEssentials\Http\Controllers\GameController;
+use Furic\GameEssentials\Http\Controllers\PlayerController;
+use Furic\GameEssentials\Http\Controllers\PlayerGameController;
 
 // Games
 Route::get('games/{id}', [GameController::class, 'show'])->name('games.show');
