@@ -14,7 +14,7 @@ class GameEssentialsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/../api.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/../migrations');
         // $this->publishes([
         //     __DIR__ . '/../config/game-essentials.php' => config_path('game-essentials.php'),
