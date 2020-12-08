@@ -11,7 +11,7 @@ class Player extends Model
 
     public function games()
     {
-        return $this->hasMany('App\PlayerGame');
+        return $this->belongsToMany('Furic\GameEssentials\Models\Game');
     }
 
     public static function findByName($nameId)

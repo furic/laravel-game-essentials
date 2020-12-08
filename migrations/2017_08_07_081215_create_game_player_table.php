@@ -14,19 +14,19 @@ class CreatePlayerGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('player_games', function (Blueprint $table) {
+        Schema::create('game_player', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->integer('player_id')->unsigned();
             $table->integer('game_id')->unsigned();
+            $table->integer('player_id')->unsigned();
             $table->tinyInteger('channel')->unsigned()->default('0');
             $table->smallInteger('version')->unsigned()->default('100');
             $table->boolean('is_hack')->default(false);
             
             $table->timestamps();
 
-            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
+            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
         });
     }
 

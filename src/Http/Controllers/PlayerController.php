@@ -3,7 +3,7 @@
 namespace Furic\GameEssentials\Http\Controllers;
 
 use Furic\GameEssentials\Models\Player;
-use Furic\GameEssentials\Models\PlayerGame;
+use Furic\GameEssentials\Models\GamePlayer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,13 @@ class PlayerController extends Controller
      */
     public function show($id)
     {
-        return response(Player::findOrFail($id), 200);
+        try {
+            return response(Player::findOrFail($id), 200);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response([
+                'error' => 'No player found.'
+            ], 400);
+        }
     }
 
     /**
@@ -30,7 +36,11 @@ class PlayerController extends Controller
     public function showWithName($name)
     {
         $player = Player::findByName($name);
-        return response($player, 200);
+        if ($player != NULL)
+            return response($player, 200);
+        return response([
+            'error' => 'No player found.'
+        ], 400);
     }
 
     /**
@@ -62,15 +72,15 @@ class PlayerController extends Controller
             $player = Player::create($data);
         }
         
-        // Create playerGame if not exists
+        // Update/create GamePlayer entry if not exists
         if ($request->has('game_id')) {
-            $playerGame = PlayerGame::findByPlayerGame($player->id, $request->game_id);
+            $playerGame = GamePlayer::findByGamePlayer($request->game_id, $player->id);
             if ($playerGame) {
                 $playerGame->update($request->all());
             } else {
                 $data = $request->all();
                 $data['player_id'] = $player->id;
-                PlayerGame::create($data);
+                GamePlayer::create($data);
             }
         }
         
@@ -86,9 +96,48 @@ class PlayerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $player = Player::findOrFail($id);
-        $player->update($request->all());
-        return response($player, 200);
+        try {
+            $player = Player::findOrFail($id);
+            $player->update($request->all());
+            // Update/create GamePlayer entry
+            if ($request->has('game_id')) {
+                $playerGame = GamePlayer::findByPlayerGame($request->game_id, $id);
+                if ($playerGame) {
+                    $playerGame->update($request->all());
+                } else {
+                    $data = $request->all();
+                    $data['player_id'] = $player->id;
+                    PlayerGame::create($data);
+                }
+            }
+            return response($player, 200);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response([
+                'error' => 'No player found.'
+            ], 400);
+        }
+    }
+
+    /**
+     * Display a listing of the game resource by a given player ID.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showGames(Request $request, $id)
+    {
+        try {
+            if ($request->limit <= 0) {
+                return response(Player::findOrFail($id)->games, 200);
+            } else {
+                return response(Player::findOrFail($id)->games->take($request->limit), 200);
+            } 
+         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response([
+                'error' => 'No player found.'
+            ], 400);
+        }
     }
 
 }

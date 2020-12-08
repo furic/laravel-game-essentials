@@ -14,10 +14,10 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-    - [Web Console](#web-console)
-    - [Redeem Code Parameters](#redeem-code-parameters)
-    - [Redeem Validator API](#redeem-validator-api)
-    - [Unity Client Repo](#unity-client-repo)
+    - [Games Table](#games-table)
+    - [Players Table](#players-table)
+    - [GamePlayer Privot Table](#gameplayer-privot-table)
+    - [API URLs](#api-urls)
 - [TODO](#todo)
 - [License](#license)
 
@@ -43,16 +43,15 @@ Find the `providers` array and add our service provider.
 
 ## Configuration
 
-To create table for redeem codes in database run:
+To create table for game essentials in database run:
 ```bash
 $ php artisan migrate
 ```
 
 ## Usage
 
-### Game Parameters
+### Games Table
 
-The games table structure:
 ```
 | Name            | Type     | Not Null |
 |-----------------|----------|----------|
@@ -70,9 +69,8 @@ The games table structure:
 - Android Version: The latest version number in Android, used for force update in client.
 - tvOS Version: The latest version number in tvOS, used for force update in client.
 
-### Player Parameters
+### Players Table
 
-The players table structure:
 ```
 | Name          | Type     | Not Null |
 |---------------|----------|----------|
@@ -94,15 +92,14 @@ The players table structure:
 - Name: The name of the player input in game/app. (Optional)
 - IP: The IP of the player when being first seen.
 
-### Player Parameters
+### GamePlayer Privot Table
 
-Finally, the player-games table structure:
 ```
 | Name       | Type     | Not Null |
 |------------|----------|----------|
 | id         | integer  |     ✓    |
-| player_id  | integer  |     ✓    |
 | game_id    | integer  |     ✓    |
+| player_id  | integer  |     ✓    |
 | channel    | integer  |     ✓    |
 | version    | integer  |     ✓    |
 | is_hack    | tinyint  |     ✓    |
@@ -110,19 +107,22 @@ Finally, the player-games table structure:
 | updated_at | datetime |          |
 ```
 
-- Player ID: The ID of a player.
 - Game ID: The ID of a the game that player launched.
+- Player ID: The ID of a player.
 - Channel: The channel of the player getting into the game. Mostly used for Android players, e.g. Sumsung Store, Huawei App Gallery, etc. (Optional)
-- Version: The current game version that the player device running.
+- Version: The current game version that the player device is running.
 - Is Hacked: A boolean to mark if the player ever performed any hack in game, for analytics and limiting functions in client.
 
-### API
+### API URLs
 
 GET `<server url>/games/{id}`
 Returns a JSON data from a given game ID, for debug usage only.
 
 GET `<server url>/games/{id}/versions`
 Returns a JSON data containing the versions from a given game ID, for client checking the latest game version and perform force-update.
+
+GET `<server url>/games/{id}/players`
+Returns a JSON array of all players from a given game ID, for debug usage only.
 
 GET `<server url>/players/{id}`
 Returns a JSON data from a given player ID, for debug usage only.
@@ -131,12 +131,12 @@ GET `<server url>/players/name/{name}`
 Returns a JSON data from a given player name, for debug usage only.
 
 POST `<server url>/players`
-Creates a player with given POST data.
+Creates a JSON data of a player with given POST data. If the player is already exists with the given UDID, Facebook ID, or game servies IDs, it update the player data instead.
 
 PUT `<server url>/players/{id}`
-Updates a player with a given player id and POST data.
+Updates a JSON data of a player with a given player id.
 
-GET `<server url>/games/{game-id}/players`
+GET `<server url>/players/{id}/games`
 Returns a JSON array of all players from a given game ID, for debug usage only.
 
 ## TODO
@@ -147,4 +147,4 @@ Returns a JSON array of all players from a given game ID, for debug usage only.
 
 ## License
 
-laravel-redeem-codes is licensed under a [MIT License](https://github.com/furic/laravel-game-essentials/blob/main/LICENSE).
+laravel-game-essentials is licensed under a [MIT License](https://github.com/furic/laravel-game-essentials/blob/main/LICENSE).
