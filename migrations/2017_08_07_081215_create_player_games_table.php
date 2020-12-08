@@ -19,8 +19,8 @@ class CreatePlayerGamesTable extends Migration
             
             $table->integer('player_id')->unsigned();
             $table->integer('game_id')->unsigned();
-            $table->tinyInteger('channel')->unsigned()->default(0);
-            $table->smallInteger('version')->unsigned()->default(100);
+            $table->tinyInteger('channel')->unsigned()->default('0');
+            $table->smallInteger('version')->unsigned()->default('100');
             $table->boolean('is_hack')->default(false);
             
             $table->timestamps();

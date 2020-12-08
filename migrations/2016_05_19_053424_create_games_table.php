@@ -17,9 +17,9 @@ class CreateGamesTable extends Migration
             $table->increments('id');
             
             $table->string('name', 128);
-            $table->smallInteger('version_ios')->unsigned()->default(100);
-            $table->smallInteger('version_android')->unsigned()->default(100);
-            $table->smallInteger('version_tvos')->unsigned()->default(100);
+            $table->smallInteger('version_ios')->unsigned()->default('100');
+            $table->smallInteger('version_android')->unsigned()->default('100');
+            $table->smallInteger('version_tvos')->unsigned()->default('100');
             
             $table->timestamps();
         });

@@ -6,7 +6,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/furic/laravel-game-essentials/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/furic/laravel-game-essentials/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/furic/laravel-game-essentials/badges/build.png?b=main)](https://scrutinizer-ci.com/g/furic/laravel-game-essentials/build-status/main)
 
-> Game Essentials for [Laravel 5.*](https://laravel.com/). This package is required and used by few packages in [Sweaty Chair Studio](https://www.sweatychair.com) creating the basic data and essential functions for a gaming server backend. This provides functions such as registering players and assign the players in a game. After that the data can be used for analytics purpose.
+> Game Essentials for [Laravel 5.*](https://laravel.com/). This package is required and used by few packages in [Sweaty Chair Studio](https://www.sweatychair.com) creating the basic data and essential functions for a gaming server backend. This provides functions such as registering players and assign the players to a game. After that the data can be used for analytics purpose.
 
 > If you are using other packages that requires this package, this will be added automatically and you do not need to install it manually. However, you can still use this package alone without using other packages.
 
@@ -43,11 +43,6 @@ Find the `providers` array and add our service provider.
 
 ## Configuration
 
-Publish config & migration file using Artisan command:
-```bash
-$ php artisan vendor:publish
-```
-
 To create table for redeem codes in database run:
 ```bash
 $ php artisan migrate
@@ -57,13 +52,19 @@ $ php artisan migrate
 
 ### Game Parameters
 
-A game has following parameters:
+The games table structure:
 ```
-            $table->string('name', 128);
-            $table->smallInteger('version_ios')->unsigned();
-            $table->smallInteger('version_android')->unsigned();
-            $table->smallInteger('version_tvos')->unsigned();
+| Name            | Type     | Not Null |
+|-----------------|----------|----------|
+| id              | integer  |     ✓    |
+| name            | varchar  |     ✓    |
+| version_ios     | integer  |     ✓    |
+| version_android | integer  |     ✓    |
+| version_tvos    | integer  |     ✓    |
+| created_at      | datetime |          |
+| updated_at      | datetime |          |
 ```
+
 - Name: The name of the game/app.
 - iOS Version: The latest version number in iOS, used for force update in client.
 - Android Version: The latest version number in Android, used for force update in client.
@@ -71,15 +72,21 @@ A game has following parameters:
 
 ### Player Parameters
 
-A game has following parameters:
+The players table structure:
 ```
-            $table->string('facebook_id', 128)->nullable();
-            $table->string('gamecenter_id', 128)->nullable();
-            $table->string('playgames_id', 128)->nullable();
-            $table->string('udid', 128);
-            $table->string('name', 128)->nullable;
-            $table->string('ip', 15);
+| Name          | Type     | Not Null |
+|---------------|----------|----------|
+| id            | integer  |     ✓    |
+| facebook_id   | varchar  |          |
+| gamecenter_id | varchar  |          |
+| playgames_id  | varchar  |          |
+| udid          | varchar  |          |
+| name          | varchar  |          |
+| ip            | varchar  |     ✓    |
+| created_at    | datetime |          |
+| updated_at    | datetime |          |
 ```
+
 - Facebook ID: The Facebook ID of a player. (Optional)
 - Game Center ID: The Game Center ID of a player in iOS. (Optional)
 - Google Play Games ID: The Google Play Games ID of a player in Android. (Optional)
@@ -89,14 +96,20 @@ A game has following parameters:
 
 ### Player Parameters
 
-Finally, a player-game has following parameters:
+Finally, the player-games table structure:
 ```
-            $table->integer('player_id')->unsigned();
-            $table->integer('game_id')->unsigned();
-            $table->tinyInteger('channel')->unsigned();
-            $table->smallInteger('version')->unsigned();
-            $table->boolean('is_hack')->default(false);
+| Name       | Type     | Not Null |
+|------------|----------|----------|
+| id         | integer  |     ✓    |
+| player_id  | integer  |     ✓    |
+| game_id    | integer  |     ✓    |
+| channel    | integer  |     ✓    |
+| version    | integer  |     ✓    |
+| is_hack    | tinyint  |     ✓    |
+| created_at | datetime |          |
+| updated_at | datetime |          |
 ```
+
 - Player ID: The ID of a player.
 - Game ID: The ID of a the game that player launched.
 - Channel: The channel of the player getting into the game. Mostly used for Android players, e.g. Sumsung Store, Huawei App Gallery, etc. (Optional)
