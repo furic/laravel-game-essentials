@@ -14,7 +14,7 @@ class CreatePlayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('players', function(Blueprint $table) {
             $table->increments('id');
 
             $table->string('facebook_id', 128)->nullable();

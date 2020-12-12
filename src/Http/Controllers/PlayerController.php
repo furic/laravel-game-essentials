@@ -36,8 +36,9 @@ class PlayerController extends Controller
     public function showWithName($name)
     {
         $player = Player::findByName($name);
-        if ($player != NULL)
+        if ($player != NULL) {
             return response($player, 200);
+        }
         return response([
             'error' => 'No player found.'
         ], 400);

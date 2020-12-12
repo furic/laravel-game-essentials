@@ -139,6 +139,9 @@ Updates a JSON data of a player with a given player id.
 GET `<server url>/players/{id}/games`
 Returns a JSON array of all players from a given game ID, for debug usage only.
 
+API Document can be found [here](https://documenter.getpostman.com/view/2560814/TVmV6tm8#af5d8a40-b4ab-497f-af69-43f7ad95e5fe).
+
+
 ## TODO
 
 - Create the web console to add/edit games.
