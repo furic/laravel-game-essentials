@@ -30,7 +30,6 @@ class GameEssentialsServiceProvider extends ServiceProvider
     {
         $this->app->make('Furic\GameEssentials\Http\Controllers\GameController');
         $this->app->make('Furic\GameEssentials\Http\Controllers\PlayerController');
-        $this->app->make('Furic\GameEssentials\Http\Controllers\PlayerGameController');
         // $this->mergeConfigFrom(
         //     __DIR__ . '/../config/game-essentials.php', 'game-essentials'
         // );
