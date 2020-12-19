@@ -21,7 +21,7 @@ class GameController extends Controller
             return response(Game::findOrFail($id), 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response([
-                'error' => 'No game found.'
+                'error' => 'Game not found.'
             ], 400);
         }
     }
@@ -43,7 +43,7 @@ class GameController extends Controller
             ], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response([
-                'error' => 'No game found.'
+                'error' => 'Game not found.'
             ], 400);
         }
     }
@@ -58,14 +58,14 @@ class GameController extends Controller
     public function showPlayers(Request $request, $id)
     {
         try {
-            if ($request->limit <= 0) {
-                return response(Game::findOrFail($id)->players, 200);
+            if ($request->filled('limit') && $request->limit > 0) {
+                return response(Game::findOrFail($id)->players()->take($request->limit)->get(), 200);
             } else {
-                return response(Game::findOrFail($id)->players->take($request->limit), 200);
+                return response(Game::findOrFail($id)->players()->take(100)->get(), 200); // Max 100 records to avoid memory exhauseted
             }
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response([
-                'error' => 'No game found.'
+                'error' => 'Game not found.'
             ], 400);
         }
     }
