@@ -115,28 +115,28 @@ $ php artisan migrate
 
 ### API URLs
 
-GET `<server url>/games/{id}`
+GET `<server url>/api/games/{id}`
 Returns a JSON data from a given game ID, for debug usage only.
 
-GET `<server url>/games/{id}/versions`
+GET `<server url>/api/games/{id}/versions`
 Returns a JSON data containing the versions from a given game ID, for client checking the latest game version and perform force-update.
 
-GET `<server url>/games/{id}/players`
+GET `<server url>/api/games/{id}/players`
 Returns a JSON array of all players from a given game ID, for debug usage only.
 
-GET `<server url>/players/{id}`
+GET `<server url>/api/players/{id}`
 Returns a JSON data from a given player ID, for debug usage only.
 
-GET `<server url>/players/name/{name}`
+GET `<server url>/api/players/name/{name}`
 Returns a JSON data from a given player name, for debug usage only.
 
-POST `<server url>/players`
+POST `<server url>/api/players`
 Creates a JSON data of a player with given POST data. If the player is already exists with the given UDID, Facebook ID, or game servies IDs, it update the player data instead.
 
-PUT `<server url>/players/{id}`
+PUT `<server url>/api/players/{id}`
 Updates a JSON data of a player with a given player id.
 
-GET `<server url>/players/{id}/games`
+GET `<server url>/api/players/{id}/games`
 Returns a JSON array of all players from a given game ID, for debug usage only.
 
 API Document can be found [here](https://documenter.getpostman.com/view/2560814/TVmV6tm8#af5d8a40-b4ab-497f-af69-43f7ad95e5fe).
