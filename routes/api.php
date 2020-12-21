@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Furic\GameEssentials\Http\Controllers\GameController;
 use Furic\GameEssentials\Http\Controllers\PlayerController;
 
-Route::prefix('api')->group(function () {
+Route::prefix('api')->group(function() {
 
 	// Games
 	Route::get('games/{id}', [GameController::class, 'show'])->name('games.show');
@@ -18,4 +18,4 @@ Route::prefix('api')->group(function () {
 	Route::put('players/{id}', [PlayerController::class, 'update'])->name('players.update');
 	Route::get('players/{id}/games', [PlayerController::class, 'showGames'])->name('players.games');
 
-}
+});
