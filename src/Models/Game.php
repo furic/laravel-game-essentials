@@ -9,9 +9,11 @@ class Game extends Model
 
     protected $fillable = ['name', 'version_ios', 'version_android', 'version_tvos'];
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function players()
     {
-        return $this->belongsToMany('Furic\GameEssentials\Models\Player');
+        return $this->belongsToMany(Player::class);
     }
 
 }

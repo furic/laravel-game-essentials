@@ -9,9 +9,11 @@ class Player extends Model
 
     protected $fillable = ['facebook_id', 'gamecenter_id', 'playgames_id', 'udid', 'name', 'ip'];
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function games()
     {
-        return $this->belongsToMany('Furic\GameEssentials\Models\Game');
+        return $this->belongsToMany(Game::class);
     }
 
     public static function findByName($nameId)
